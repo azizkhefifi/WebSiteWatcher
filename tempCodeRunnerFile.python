@@ -1,0 +1,54 @@
+import customtkinter as ctk
+import subprocess
+import threading
+
+# List of monitored sites
+monitored_sites = [
+    "https://example.com",
+    "https://another-site.com",
+    "https://yetanother-site.com"
+]
+
+class MonitoringApp(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+
+        self.title("Monitoring Dashboard")
+        self.geometry("500x400")
+
+        # Title label
+        ctk.CTkLabel(self, text="Monitoring Dashboard", font=("Arial", 18, "bold")).pack(pady=10)
+
+        # Monitored sites section
+        ctk.CTkLabel(self, text="Monitored Sites:").pack()
+        self.text_area_sites = ctk.CTkTextbox(self, height=120, width=400, state="disabled")
+        self.text_area_sites.pack(pady=5)
+        self.update_monitored_sites()
+
+        # Status updates section
+        ctk.CTkLabel(self, text="Status Updates:").pack()
+        self.text_area_status = ctk.CTkTextbox(self, height=120, width=400)
+        self.text_area_status.pack(pady=5)
+
+        # Start monitoring button
+        self.start_button = ctk.CTkButton(self, text="Open Monitoring App", command=self.launch_monitoring)
+        self.start_button.pack(pady=10)
+
+    def update_monitored_sites(self):
+        """Updates the text area with the list of monitored sites."""
+        self.text_area_sites.configure(state="normal")
+        self.text_area_sites.delete("1.0", "end")
+        for site in monitored_sites:
+            self.text_area_sites.insert("end", site + "\n")
+        self.text_area_sites.configure(state="disabled")
+
+    def launch_monitoring(self):
+        """Launches the web monitoring script in a separate process."""
+        def run_monitor():
+            subprocess.Popen(["python", "web_monitor.py"])
+        threading.Thread(target=run_monitor, daemon=True).start()
+
+# Run the app
+if __name__ == "__main__":
+    app = MonitoringApp()
+    app.mainloop()

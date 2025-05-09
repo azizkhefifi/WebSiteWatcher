@@ -1,0 +1,32 @@
+[
+    {
+        "url": "https://www.keystone-corporation.com/",
+        "danger_level": "Critical"
+    },
+    {
+        "url": "https://www.attijariwafabank.com/fr",
+        "danger_level": "Medium",
+        "output_dir": "C:/pfe/code1/WebMonitor_Output"
+    },
+    {
+        "url": "https://losratones.shop/",
+        "danger_level": "Low",
+        "excluded_tags": [
+            10,
+            341,
+            345,
+            346
+        ],
+        "output_dir": "C:/pfe/code1/WebMonitor_Output"
+    },
+    {
+        "url": "https://www.bbc.com/news",
+        "danger_level": "High",
+        "excluded_tags": [
+            2,
+            6,
+            12
+        ],
+        "output_dir": "C:/pfe/code1/WebMonitor_Output"
+    }
+]
